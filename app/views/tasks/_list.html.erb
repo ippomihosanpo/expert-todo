@@ -16,16 +16,18 @@
 <div class="col-xs-4">
   <div class="panel <%= panel %> task" data-task-id="<%= task.id %>">
       <div class="panel-heading">
+        <% if task.scheduled_start_at.present? || task.scheduled_end_at.present? %>
           <%= task.scheduled_start_at.try(:strftime, '%Y/%m/%d %H:%M') %> 〜
           <%= task.scheduled_end_at.try(:strftime, '%Y/%m/%d %H:%M') %>
-          <% unless task.status == 2 %>
-            <%= link_to "tasks/#{task.id}/finish", method: :patch, remote: true do %>
-              <%= fa_icon 'check-circle-o' %>
-            <% end %>
-          <% else %>
-            <%= fa_icon 'check-circle' %>
+          <br>
+        <% end %>
+        <% unless task.status == 2 %>
+          <%= link_to "tasks/#{task.id}/finish", method: :patch, remote: true do %>
+            <%= fa_icon 'check-circle-o' %>
           <% end %>
-      <br>
+        <% else %>
+          <%= fa_icon 'check-circle' %>
+        <% end %>
       <strong><%= task.title %></strong>
       [<%= label_priority(task.priority) %>]
       [<%= label_status(task.status) %>]

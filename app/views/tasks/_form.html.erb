@@ -58,10 +58,11 @@
     form.datetime_select(
       :scheduled_start_at,
       {use_month_numbers: true,
-      start_year:        Time.now.year,
-      end_year:          (Time.now.year - 5),
-      default:           Time.zone.today,
-      date_separator:    '%s',
+      start_year:         Time.now.year,
+      end_year:           (Time.now.year + 5),
+      # default:            Time.zone.today,
+      include_blank:      true,
+      date_separator:     '%s',
       datetime_separator: '%s'},
       {class: 'form-control datetime-column'}
     ), '年 ', '月 ', '日 - ')
@@ -79,10 +80,11 @@
     form.datetime_select(
       :scheduled_end_at,
       {use_month_numbers: true,
-      start_year:        Time.now.year,
-      end_year:          (Time.now.year - 5),
-      default:           Time.zone.today,
-      date_separator:    '%s',
+      start_year:         Time.now.year,
+      end_year:           (Time.now.year + 5),
+      # default:            Time.zone.today,
+      include_blank:      true,
+      date_separator:     '%s',
       datetime_separator: '%s'},
       {class: 'form-control datetime-column'}
     ), '年 ', '月 ', '日 - ')
