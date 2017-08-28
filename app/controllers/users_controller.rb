@@ -4,11 +4,15 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    @users = User.all
+    # ユーザー一覧にアクセスできないように
+    # @users = User.all
+    redirect_to edit_user_path(@current_user)
   end
 
   # GET /users/1
   def show
+    # 他のユーザー情報にアクセスできないように
+    redirect_to edit_user_path(@current_user)
   end
 
   # GET /users/new
@@ -18,6 +22,10 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    # 他のユーザー情報にアクセスできないように
+    unless @user.id == @current_user.id
+      redirect_to edit_user_path(@current_user)
+    end
   end
 
   # POST /users
@@ -27,18 +35,18 @@ class UsersController < ApplicationController
     if @user.save
       # ログイン情報を登録
       session[:user] = @user.id
-      redirect_to @user, notice: 'ユーザー登録が完了しました'
+      redirect_to '/', notice: 'ユーザー登録が完了しました'
     else
-      render :new
+      render action: :new
     end
   end
 
   # PATCH/PUT /users/1
   def update
     if @user.update(user_params)
-      redirect_to @user, notice: 'User was successfully updated.'
+      redirect_to edit_user_path(@user), notice: 'ユーザー情報を更新しました'
     else
-      render :edit
+      render action: :edit
     end
   end
 

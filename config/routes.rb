@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       patch ':id/finish', to: "tasks#finish"
     end
   end
-  resources :users, only: [:new, :create, :show, :edit, :update, :destroy ]
+  resources :users
   resources :login, only: [:index, :create] do
     collection do
       delete  '/', to: "login#delete"

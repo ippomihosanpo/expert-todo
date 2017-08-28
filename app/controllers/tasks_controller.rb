@@ -35,7 +35,7 @@ class TasksController < ApplicationController
   def update
     if @task.update(task_params)
       @tasks = task_list
-      render :create
+      render :update
     else
       render :edit
     end
