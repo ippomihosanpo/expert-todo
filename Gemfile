@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.3.4'
+ruby '2.4.1'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -57,7 +57,7 @@ group :development do
   # gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
-group :production, :staging do
-  # Heroku用に動作させるgemらしい
-  gem 'rails_12factor'
-end
+# group :production, :staging do
+#   # Heroku用に動作させるgemらしい => いらない
+#   gem 'rails_12factor'
+# end
