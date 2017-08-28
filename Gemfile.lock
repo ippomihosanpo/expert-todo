@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/rails/webpacker.git
+  revision: 691389f343b6805aee7e27d2e222d81a78180464
+  specs:
+    webpacker (2.0)
+      activesupport (>= 4.2)
+      rack-proxy (>= 0.6.1)
+      railties (>= 4.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -78,6 +87,8 @@ GEM
     pg (0.21.0)
     puma (3.10.0)
     rack (2.0.3)
+    rack-proxy (0.6.2)
+      rack
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (5.1.3)
@@ -168,6 +179,7 @@ DEPENDENCIES
   therubyracer
   turbolinks (~> 5)
   uglifier (>= 1.3.0)
+  webpacker!
 
 RUBY VERSION
    ruby 2.3.4p301
