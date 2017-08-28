@@ -35,7 +35,10 @@
     </nav>
     <div class="container">
       <% if notice.present? %>
-        <p class="alert alert-info"><%= notice %></p>
+        <div class="alert alert-info">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+          <%= notice %>
+        </div>
       <% end %>
       <%= yield %>
     </div>
