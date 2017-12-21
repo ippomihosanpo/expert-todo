@@ -27,7 +27,7 @@
       <% if @current_user.present? %>
           <ul class="nav navbar-nav">
             <li><%= link_to @current_user.name, '#' %></li>
-            <li><%= link_to "ログアウト", login_index_path, method: :delete %></li>
+            <li><%= link_to "ログアウト", sessions_path, method: :delete %></li>
           </ul>
       <% end %>
         </div>

@@ -1,17 +1,17 @@
-class LoginController < ApplicationController
+class SessionsController < ApplicationController
   # ログイン画面ではログインチェック飛ばす
-  skip_before_action :logged_in?
+  skip_before_action :check_logged_in
 
   def index
   end
 
   def create
-    @user = User.find_by(email: login_params[:email])
-    if @user.present? && @user.authenticate(login_params[:password])
+    @user = User.find_by(email: session_params[:email])
+    if @user.present? && @user.authenticate(session_params[:password])
       # ログインOK
-      reset_session
+      logout
       session[:user] = @user.id
-      redirect_to params[:referer].present? ? params[:referer] : '/', notice: 'ログインしました'
+      redirect_to params[:referer].presence || '/', notice: 'ログインしました'
     else
       # ログインNG
       flash.now[:referer] = params[:referer]
@@ -22,12 +22,12 @@ class LoginController < ApplicationController
 
   # ログアウト
   def delete
-    reset_session
-    redirect_to login_index_url, notice: 'ログアウトしました'
+    logout
+    redirect_to sessions_url, notice: 'ログアウトしました'
   end
 
   private
-    def login_params
+    def session_params
       params.require(:user).permit(:email, :password)
     end
 end

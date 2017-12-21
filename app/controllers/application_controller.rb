@@ -1,27 +1,21 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_action :logged_in?
+  before_action :check_logged_in
 
   # ログインチェック
-  def logged_in?
-    user_id = session[:user]
-    if user_id then
-      begin
-        @current_user = User.find(user_id)
-      rescue ActiveRecord::RecordNotFound
-        logout
-      end
-    end
+  def check_logged_in
+    @current_user = User.find_by(id: session[:user])
     unless @current_user
       # ログインしてなければ、ログイン画面に飛ばす
       # ログイン後、リクエストされたページに戻れるようにリファラを渡しとく
-      flash[:referer] = request.fullpath
-      redirect_to "/login"
+      logout
+      flash[:referrer] = request.fullpath
+      redirect_to "/sessions"
     end
   end
 
   # セッションのリセット(ログアウト)
-  def reset_session
+  def logout
     session[:user] = nil
     @current_user = nil
   end

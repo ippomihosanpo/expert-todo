@@ -1,4 +1,4 @@
-<%= form_for(User.new, url: login_index_path, method: :post) do |f| %>
+<%= form_for(User.new, url: sessions_path, method: :post) do |f| %>
   <% if flash[:error_message].present? %>
     <div class="alert alert-danger">
       <ul><li><%= flash[:error_message] %></li></ul>

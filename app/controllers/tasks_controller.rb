@@ -1,9 +1,9 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy, :finish]
+  before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   # GET /tasks
   def index
-    @tasks = task_list
+    @tasks = Task.list_by_user_id(user_id: @current_user.id)
   end
 
   # GET /tasks/1
@@ -24,7 +24,7 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
 
     if @task.save
-      @tasks = task_list
+      @tasks = Task.list_by_user_id(user_id: @current_user.id)
       render :create
     else
       render :new
@@ -47,12 +47,6 @@ class TasksController < ApplicationController
     redirect_to tasks_url, notice: '削除しました'
   end
 
-  # タスクの完了
-  def finish
-    @tasks = task_list
-    @task.update(status: 2, finished_at: Time.zone.today)
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_task
@@ -64,7 +58,4 @@ class TasksController < ApplicationController
       params.require(:task).permit(Task::REGISTRABLE_ATTRIBUTES)
     end
 
-    def task_list
-      Task.where(user_id: @current_user.id).order('scheduled_end_at, status')
-    end
 end
