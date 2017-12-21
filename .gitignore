@@ -20,4 +20,8 @@
 .byebug_history
 
 *.DS_Store
-
+.idea
+.idea/inspectionProfiles
+/public/packs
+/public/packs-test
+/node_modules

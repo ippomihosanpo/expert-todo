@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
     <title>ExpertTodo</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +10,42 @@
   </head>
 
   <body>
-    <%= yield %>
+    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <% if @current_user.present? %>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          <% end %>
+          <a class="navbar-brand" href="/">ExpertTodo</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+      <% if @current_user.present? %>
+          <ul class="nav navbar-nav">
+            <li><%= link_to @current_user.name, '#' %></li>
+            <li><%= link_to "ログアウト", sessions_path, method: :delete %></li>
+          </ul>
+      <% end %>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <% if notice.present? %>
+        <div class="alert alert-info">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+          <%= notice %>
+        </div>
+      <% end %>
+      <%= yield %>
+    </div>
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted">&nbsp;</p>
+      </div>
+    </footer>
   </body>
 </html>

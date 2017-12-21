@@ -1,0 +1,70 @@
+<%= form_with(model: user, local: true) do |form| %>
+  <% if user.errors.any? %>
+    <div class="row">
+      <div class="col-xs-5">
+        <div class="alert alert-danger">
+          <ul>
+          <% user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+    </div>
+  </div>
+  <% end %>
+
+  <div class="form-group">
+    <div class="row">
+      <div class="col-xs-2">
+        <%= form.label :email %>
+      </div>
+      <div class="col-xs-3">
+        <%= form.email_field :email, id: :user_email, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="row">
+      <div class="col-xs-2">
+        <%= form.label :name %>
+      </div>
+      <div class="col-xs-3">
+        <%= form.text_field :name, id: :user_name, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="row">
+      <div class="col-xs-2">
+        <%= form.label :password %>
+      </div>
+      <div class="col-xs-3">
+        <%= form.password_field :password, id: :user_password, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <div class="row">
+      <div class="col-xs-2">
+        <%= form.label :password_confirmation %>
+      </div>
+      <div class="col-xs-3">
+        <%= form.password_field :password_confirmation, id: :user_password_confirmation, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="row">
+      <div class="col-xs-2">
+      </div>
+      <div class="col-xs-3">
+        <%= form.submit '登録', class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+<% end %>
